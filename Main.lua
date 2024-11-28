@@ -1396,7 +1396,7 @@ local function ChangeModeFastAttack(SelectFastAttackMode)
 end
 
 -- Dropdown để chọn chế độ tấn công nhanh
-local SelectedFastAttackModesDropdown = Tabs.Main:AddDropdown("SelectedFastAttackModes", {
+local SelectedFastAttackModesDropdown = Tabs.Setting:AddDropdown("SelectedFastAttackModes", {
     Title = "Select Fast Attack",
     Values = SelectedFastAttackModes,
     Multi = false,
@@ -1409,7 +1409,7 @@ SelectedFastAttackModesDropdown:OnChanged(function(value)
 end)
 
 -- Toggle để bật tắt tấn công nhanh
-local FASTAT = Tabs.Main:AddToggle("Fast_Attack", {Title = "Fast Attack", Default = true})
+local FASTAT = Tabs.Setting:AddToggle("Fast_Attack", {Title = "Fast Attack", Default = true})
 FASTAT:OnChanged(function(value)
     Fast_Attack = value
     DamageAura = value
@@ -1428,40 +1428,10 @@ Mouse.Button1Down:Connect(function()
 end)
 
 
-local SelectFastAttackMode = (SelectFastAttackMode or "100")
-
-SelectedFastAttackMode = {"25","50","75","100"}
-
-local function ChangeModeFastAttack(SelectFastAttackMode)
-	if SelectFastAttackMode == "25" then
-		FireCooldown = 0.2
-    elseif SelectFastAttackMode == "50" then
-		FireCooldown = 0.01
-	elseif SelectFastAttackMode == "75" then
-		FireCooldown = 0.007
-	elseif SelectFastAttackMode == "100" then
-		FireCooldown = 0.0002
-	end
-end
-
-local SelectedFastAttackModes = Tabs.Setting:AddDropdown("SelectedFastAttackModes", {
-	Title = "Select % Fast Attack",
-    Description = "",
-	Values = SelectedFastAttackMode,
-	Multi = false,
-	Default = 3,
-})
-
-SelectedFastAttackModes:OnChanged(function(value)
-	SelectFastAttackMode = value
-	ChangeModeFastAttack(SelectFastAttackMode)	
-end)
-
 local FASTAT = Tabs.Setting:AddToggle("Fast_Attack", {Title = "On Mob",  Description = "Fast Attack On Mob", Default = true })
 FASTAT:OnChanged(function(value)
 	Fast_Attack = value
 	DamageAura = value
-	ClickNoCooldown = value
 	NoAttackAnimation = value
 	DmgAttack.Enabled = not value
 end)
@@ -1549,7 +1519,7 @@ SliderPosZ:SetValue(0)
 local random_pos = math.random(0, 30)
 
 local DropdownSelectWeapon = Tabs.Main:AddDropdown("DropdownSelectWeapon", {
-    Title = "Select M1 Weapon ",
+    Title = "Select Weapon ",
     Description = "",
     Values = {'Melee','Sword','Blox Fruit'},
     Multi = false,
