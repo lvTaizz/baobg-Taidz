@@ -1382,7 +1382,7 @@ spawn(function()
 end)
 
 -- Cấu hình chế độ tấn công nhanh
-local SelectFastAttackMode = "AnDepZai Fast"
+local SelectFastAttackMode = "Supper Fast"
 local SelectedFastAttackModes = {"Normal Attack", "Fast Attack", "Supper Fast"}
 
 local function ChangeModeFastAttack(SelectFastAttackMode)
@@ -1427,30 +1427,6 @@ Mouse.Button1Down:Connect(function()
     end
 end)
 
-
-local FASTAT = Tabs.Setting:AddToggle("Fast_Attack", {Title = "On Mob",  Description = "Fast Attack On Mob", Default = true })
-FASTAT:OnChanged(function(value)
-	Fast_Attack = value
-	DamageAura = value
-	NoAttackAnimation = value
-	DmgAttack.Enabled = not value
-end)
-
-local ToggleFastAplyer = Tabs.Setting:AddToggle("ToggleFastAplyer", {Title = "On Player", Description = "Fast Attack On Player", Default = true })
-ToggleFastAplyer:OnChanged(function(value)
-    UsefastattackPlayers = value
-end)
-
-local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
-Mouse.Button1Down:Connect(function()
-	if ClickNoCooldown then
-		local ac = CombatFrameworkR.activeController
-		if ac and ac.equipped then
-			ac.hitboxMagnitude = 60
-			pcall(AttackFunction,3)
-		end
-	end
-end)
 
         local DropdownTweenSpeed = Tabs.Setting:AddDropdown("DropdownTweenSpeed", {
             Title = "Tween Speed",
