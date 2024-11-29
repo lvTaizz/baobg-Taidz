@@ -1,6 +1,3 @@
-repeat task.wait() until game:IsLoaded()
-repeat task.wait() until game.Players
-repeat task.wait() until game.Players.LocalPlayer
 
 repeat wait()
     pcall(function() 
@@ -23,7 +20,8 @@ game.StarterGui:SetCore("SendNotification", {
     })
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 local Window = Fluent:CreateWindow({
     Title = "Happy Cat Hub",
     SubTitle = "by taidz",
@@ -35,7 +33,7 @@ local Window = Fluent:CreateWindow({
 })
     
 local Tabs = {
-    Setting = Window:AddTab({ Title = "Settings", Icon = "" }),
+    Setting = Window:AddTab({ Title = "Settings Farm", Icon = "" }),
     Main = Window:AddTab({ Title = "Main Farm", Icon = "" }),
     Stack = Window:AddTab({ Title = "Stack Auto Farm", Icon = "" }),
     Status = Window:AddTab({ Title = "Status", Icon = "" }),
@@ -395,101 +393,6 @@ elseif placeId == 7449423635 then
 Third_Sea = true
 end
 
-local Q = require(game.ReplicatedStorage.Quests)
-    local R = {"BartiloQuest", "Trainees", "MarineQuest", "CitizenQuest"}
-    local function S()
-        local T = game.Players.LocalPlayer.Data.Level.Value
-        local min = 0
-        if T >= 1450 and game.PlaceId == 4442272183 then
-            Mob1 = "Water Fighter"
-            Mob2 = "ForgottenQuest"
-            Mob3 = 2
-        elseif T >= 700 and game.PlaceId == 2753915549 then
-            Mob1 = "Galley Captain"
-            Mob2 = "FountainQuest"
-            Mob3 = 2
-        else
-            for r, v in pairs(Q) do
-                for M, N in pairs(v) do
-                    local U = N.LevelReq
-                    for O, P in pairs(N.Task) do
-                        if T >= U and U >= min and N.Task[O] > 1 and not table.find(R, tostring(r)) then
-                            min = U
-                            Mob1 = tostring(O)
-                            Mob2 = r
-                            Mob3 = M
-                        end
-                    end
-                end
-            end
-        end
-    end
-    function CFrameQuest()
-        local GuideModule = require(game.ReplicatedStorage.GuideModule)
-        for list,NPCListC in pairs(GuideModule["Data"]["NPCList"]) do
-            if NPCListC["NPCName"] == GuideModule["Data"]["LastClosestNPC"] then
-                return list["CFrame"]
-            end
-        end
-    end
-    local Q = require(game.ReplicatedStorage.Quests)
-    local a3 = require(game.ReplicatedStorage:WaitForChild("GuideModule"))
-    function CheckDataQuest()
-        for r, v in next, a3.Data do
-            if r == "QuestData" then
-                return true
-            end
-        end
-        return false
-    end
-    function CheckNameMobDoubleQuest()
-        local a
-        if CheckDataQuest() then
-            for r, v in next, a3.Data.QuestData.Task do
-                a = r
-            end
-        end
-        return a
-    end
-    function CheckDoubleQuestSkidcuaYMF()
-        S()
-        local a5 = {}
-        if game.Players.LocalPlayer.Data.Level.Value >= 10 and CheckDataQuest() and CheckNameMobDoubleQuest() == Mob1 and #CheckNameMobDoubleQuest() > 2 then
-            for r, v in pairs(Q) do
-                for M, N in pairs(v) do
-                    for O, P in pairs(N.Task) do
-                        if tostring(O) == Mob1 then
-                            for a6, a7 in next, v do
-                                for a8, a9 in next, a7.Task do
-                                    if a8 ~= Mob1 and a9 > 1 then
-                                        if a7.LevelReq <= game.Players.LocalPlayer.Data.Level.Value then
-                                            a5["Name"] = tostring(a8)
-                                            a5["Mob2"] = r
-                                            a5["ID"] = a6
-                                        else
-                                            a5["Name"] = Mob1
-                                            a5["Mob2"] = Mob2
-                                            a5["ID"] = Mob3
-                                        end
-                                        return a5
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        else
-            a5["Name"] = Mob1
-            a5["Mob2"] = Mob2
-            a5["ID"] = Mob3
-            return a5
-        end
-        a5["Name"] = Mob1
-        a5["Mob2"] = Mob2
-        a5["ID"] = Mob3
-        return a5
-    end
     function MobLevel1OrMobLevel2()
         local aa = {}
         for r, v in pairs(game.Workspace.Enemies:GetChildren()) do
@@ -1993,8 +1896,124 @@ spawn(function()
     end
     end
   end)
+--auoto sea2 sea3
+ Tabs.Stack:AddSection("Sea Quest")
+    local Quetsi2 = Tabs.Stack:AddToggle("Quetsi2", {
+    Title = "Auto Complex Quest Sea 2",
+    Description = "",
+    Default = _G.AutoSecondSea })
+    Quetsi2:OnChanged(function(Value)
+    _G.AutoSecondSea = Value
+    saveSettings()
+end)
+    if Sea2 then
+        spawn(function()
+            while wait() do 
+                if _G.AutoSecondSea then
+                    spawn(function()
+                        local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
+                        if MyLevel >= 700 and Sea1 then
+                            if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
+                                local CFrame1 = CFrame.new(4849.29883, 5.65138149, 719.611877)
+                                repeat topos(CFrame1) wait() until (CFrame1.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
+                                wait(1.1)
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+                                wait(0.5)
+                                EquipWeapon("Key")
+                                repeat topos(CFrame.new(1347.7124, 37.3751602, -1325.6488)) wait() until (Vector3.new(1347.7124, 37.3751602, -1325.6488)-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
+                                wait(0.5)
+                            else
+                                if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
+                                    if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral [Lv. 700] [Boss]") then
+                                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                            if v.Name == "Ice Admiral" then
+                                                if not v.Humanoid.Health <= 0 then
+                                                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                                        OldCFrameSecond = v.HumanoidRootPart.CFrame
+                                                        repeat task.wait()
+                                                        NeedAttacking = true
+                                                            AutoHaki()
+                                                            EquipWeapon(_G.SelectWeapon)
+                                                            v.HumanoidRootPart.CanCollide = false
+                                                            v.Humanoid.WalkSpeed = 0
+                                                            v.Head.CanCollide = false
+                                                            
+                                                            v.HumanoidRootPart.CFrame = OldCFrameSecond
+                                                            topos(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                                                            sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                                        until not _G.AutoSecondSea or not v.Parent or v.Humanoid.Health <= 0
+                                                    end
+                                                else 
+                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                                                end
+                                            end
+                                        end
+                                    else
+                                        if game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral") then
+                                            topos(game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral").HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end)
+                end
+            end
+        end)
+    end
+    local Quetsi3 = Tabs.Stack:AddToggle("Quetsi3", {
+    Title = "Auto Sea 3",
+    Description = "",
+    Default = _G.AutoThirdSea })
+    Quetsi3:OnChanged(function(Value)
+    _G.AutoThirdSea = Value
+    saveSettings()
+end)
+    if Sea3 then
+        spawn(function()
+            while wait() do
+                if _G.AutoThirdSea then
+                    pcall(function()
+                        if game:GetService("Players").LocalPlayer.Data.Level.Value >= 1500 and Sea2 then
+                            _G.AutoFarm = false
+                            if game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("ZQuestProgress", "General") == 0 then
+                                topos(CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016))
+                                if (CFrame.new(-1926.3221435547, 12.819851875305, 1738.3092041016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                                    wait(1.5)
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ZQuestProgress","Begin")
+                                end
+                                wait(1.8)
+                                if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra [Lv. 1500] [Boss]") then
+                                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                        if v.Name == "rip_indra" then
+                                            OldCFrameThird = v.HumanoidRootPart.CFrame
+                                            repeat task.wait()
+                                            NeedAttacking = true
+                                                AutoHaki()
+                                                EquipWeapon(_G.SelectWeapon)
+                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                                                v.HumanoidRootPart.CFrame = OldCFrameThird
+                                                
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Humanoid.WalkSpeed = 0
+                                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
+                                                sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                            until _G.AutoThirdSea == false or v.Humanoid.Health <= 0 or not v.Parent
+                                        end
+                                    end
+                                elseif not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra") and (CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1000 then
+                                    topos(CFrame.new(-26880.93359375, 22.848554611206, 473.18951416016))
+                                end
+                            end
+                        end
+                    end)
+                end
+            end
+        end)
+    end
+ 
 
-  local ClientTime = Tabs.Status:AddParagraph({
+local ClientTime = Tabs.Status:AddParagraph({
     Title = "Client Time",
     Content = ""
 })
