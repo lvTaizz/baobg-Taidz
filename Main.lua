@@ -1,5 +1,5 @@
 
-repeat wait()
+repeat task.wait()
     pcall(function() 
         for i, v in pairs(getconnections(game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
             v.Function()
@@ -8,7 +8,7 @@ repeat wait()
 until tostring(game.Players.LocalPlayer.Team) == "Pirates"
 
 repeat task.wait() until game.Players.LocalPlayer.Character
-repeat task.wait() until game.Players.LocalPlayer.Character.Head
+repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("Head")
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 local plr = game.Players.LocalPlayer
@@ -17,11 +17,12 @@ game.StarterGui:SetCore("SendNotification", {
     Title = "Happy Cat Hub",
     Text = "Loading",
     Duration = 2,
-    })
+})
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
 local Window = Fluent:CreateWindow({
     Title = "Happy Cat Hub",
     SubTitle = "by taidz",
@@ -64,7 +65,7 @@ TextLabel.AnchorPoint = Vector2.new(0.5, 0.5)
 TextLabel.Position = UDim2.new(0.5, 0, -0.025, 0)
 TextLabel.Size = UDim2.new(0, 200, 0, 50)
 TextLabel.Font = Enum.Font.FredokaOne
-TextLabel.Text = "discord.gg/"
+TextLabel.Text = "Taideptrai"
 TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextSize = 20.00
 
