@@ -1938,18 +1938,17 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 local Window = Fluent:CreateWindow({
-    Title = "Happy Cat Hub [Prenium]",
-    SubTitle = " By Taidz",
+    Title = "HAPPY HUB v1",
+    SubTitle = " By baobg | Khoa | Taidz",
     TabWidth = 100,
     Size = UDim2.fromOffset(530, 350),
     Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Dark",
+    Theme = "Darker",
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
 local Tabs = {
-    Local = Window:AddTab({ Title = "Local Player", Icon = "" }),
-	Settings = Window:AddTab({ Title = "Setting Farm", Icon = "" }),
+	Settings = Window:AddTab({ Title = "Setting", Icon = "" }),
     Sh = Window:AddTab({ Title = "Shop", Icon = "" }),
     Main = Window:AddTab({ Title = "Farming", Icon = "" }),
     stack = Window:AddTab({ Title = "Stack Auto Farm", Icon = "" }), 
@@ -2034,23 +2033,23 @@ function RedeemCode(value)
         end
         end
     })
-    Tabs.Local:AddButton({
+    Tabs.Sh:AddButton({
         Title = "Teleport Sea 1",
-        Description = "",
+        Description = "faster teleport to old world with 1 click",
         Callback = function()            
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
         end
     })
-    Tabs.Local:AddButton({
+    Tabs.Sh:AddButton({
         Title = "Teleport Sea 2",
-        Description = "",
+        Description = "faster teleport to new world with 1 click",
         Callback = function()            
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
         end
     })
-    Tabs.Local:AddButton({
+    Tabs.Sh:AddButton({
         Title = "Teleport Sea 3",
-        Description = "",
+        Description = "faster teleport to third world with 1 click",
         Callback = function()            
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
         end
@@ -2312,6 +2311,12 @@ Mouse.Button1Down:Connect(function()
 		end
 	end
 end)
+
+
+Tabs.Settings:AddParagraph({
+        Title = "Warning About Fast Attack !!",
+        Content = "You nice."
+    })
     
 Toggle = Tabs.Settings:AddToggle("MyToggle", {Title = "Fast Attack V2", Description = "Better than old attack recommended", Default = true })
 Toggle:OnChanged(function(Value)
@@ -2328,7 +2333,7 @@ local function ChangeModeFastAttack(SelectFastAttackMode)
 	elseif SelectFastAttackMode == "Fast Attack" then
 		FireCooldown = 0.07
 	elseif SelectFastAttackMode == "Super Fast Attack" then
-		FireCooldown = 0.02
+		FireCooldown = 0.2
     end
 end
 
@@ -2806,8 +2811,8 @@ task.spawn(
     end
 )
     
- local USERACEV3 = Tabs.Local:AddToggle("UseV3", {Title = "Auto Turn On V3", Default = false })
- local Toggle = Tabs.Local:AddToggle("MyToggle", {Title = "Auto Turn On V4", Default = true })
+ local USERACEV3 = Tabs.Settings:AddToggle("UseV3", {Title = "Auto Use Race v3", Default = false })
+ local Toggle = Tabs.Settings:AddToggle("MyToggle", {Title = "Turn On V4", Default = true })
 
  Toggle:OnChanged(function(Value)
      AutoAwakeningRace = Value
@@ -2983,7 +2988,7 @@ end)
     end)
     
     Tabs.cailon:AddSection("Mirage Fruit Dealer")
-    local dealermirrafe = Tabs.cailon:AddToggle("dealermirrafe", {
+    local dealermirrafe = Tabs.Main:AddToggle("dealermirrafe", {
     Title = "Teleport Advanced Fruit Dealer",
     Description = "",
     Default = _G.Miragenpc })
@@ -3004,7 +3009,7 @@ spawn(function()
 end)
 local miricheat = Tabs.cailon:AddToggle("miricheat", {
     Title = "Tween Chest on Mirage Island",
-    Description = "",
+    Description = "ez nothing for read",
     Default = _G.AutoChestMirage })
     miricheat:OnChanged(function(value)
     _G.AutoChestMirage = value
@@ -3036,7 +3041,7 @@ end)
     Tabs.stack:AddSection("Sea Quest")
     local Quetsi2 = Tabs.stack:AddToggle("Quetsi2", {
     Title = "Auto Complex Quest Sea 2",
-    Description = "",
+    Description = "automatically do all tasks to be able to go to the new world",
     Default = _G.AutoSecondSea })
     Quetsi2:OnChanged(function(Value)
     _G.AutoSecondSea = Value
@@ -3099,7 +3104,7 @@ end)
     end
     local Quetsi3 = Tabs.stack:AddToggle("Quetsi3", {
     Title = "Auto Complex Quest Sea 3",
-    Description = "",
+    Description = "automatically do all tasks to be able to go to the third world",
     Default = _G.AutoThirdSea })
     Quetsi3:OnChanged(function(Value)
     _G.AutoThirdSea = Value
@@ -3335,7 +3340,7 @@ end)
     end)
     local matgun = Tabs.Main:AddToggle("matgun", {
     Title = "Farm Mastery Gun",
-    Description = "",
+    Description = "automatically farm gun mastery ez",
     Default = _G.AutoFarmGunMastery })
     matgun:OnChanged(function(Value)
     _G.AutoFarmGunMastery = Value
@@ -9390,7 +9395,7 @@ Tabs.support:AddButton({
         Title = "Server Discord",
         Description = "click for copy link and join",
         Callback = function()            
-        setclipboard("https://discord.gg/") 
+        setclipboard("https://discord.gg/VHb3D7sfqd") 
       end
     })
     Tabs.support:AddSection("Updated Logs") 
@@ -9420,7 +9425,7 @@ print("load xong r")
 print("Developer: baobg contact Facebook: lộc zutaki or discord: baobg")
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 game.StarterGui:SetCore("SendNotification", {
-Title = "Happy Cat Hub",
+Title = "baobg",
 Text = "Successfully",
 Duration = 5,
 })
