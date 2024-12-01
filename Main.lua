@@ -1192,49 +1192,20 @@ end
     end)
     L_93_.CornerRadius = UDim.new(0, 15)
     L_93_.Parent = L_92_
-
-local function playSound()
-	local sound = Instance.new("Sound", game:GetService("CoreGui"))
-	sound.SoundId = "rbxassetid://"
-	sound.Volume = 10
-	sound:Play()
-end
-
-playSound()
-
-repeat
-	wait()
-until game.Players
-repeat
-	wait()
-until game.Players.LocalPlayer
-repeat
-	wait()
-until game.ReplicatedStorage
-repeat
-	wait()
-until game.ReplicatedStorage:FindFirstChild("Remotes");
-repeat
-	wait()
-until game.Players.LocalPlayer:FindFirstChild("PlayerGui");
-repeat
-	wait()
-until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
-repeat
-	wait()
-until game:GetService("Players")
-repeat
-	wait()
-until game:GetService("Players").LocalPlayer.Character:FindFirstChild("Energy")
-wait(0.5)
-if not game:IsLoaded() then
-	repeat
-		game.Loaded:Wait()
-	until game:IsLoaded()
-end--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
     --Remove Effect
     -----------------------------------------------------------
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+        game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+    end
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+    end
 
+    spawn(function()
+		local v930_args = require(game.ReplicatedStorage.Util.CameraShaker)
+		v930_args:Stop()
+	end)
 
 local NoAttackAnimation = true
 local DmgAttack = game:GetService("ReplicatedStorage").Assets.GUI:WaitForChild("DamageCounter")
