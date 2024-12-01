@@ -1,35 +1,20 @@
--- Đợi game và các dịch vụ chính được tải
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players
 repeat task.wait() until game.Players.LocalPlayer
 
--- Đợi PlayerGui và các thành phần bên trong được tải
-repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main")
-repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam")
-repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam:FindFirstChild("Container")
-repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container:FindFirstChild("Pirates")
-repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates:FindFirstChild("Frame")
-repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame:FindFirstChild("TextButton")
+repeat wait()
+    pcall(function() 
+        for i, v in pairs(getconnections(game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
+            v.Function()
+        end 
+    end) 
+until tostring(game.Players.LocalPlayer.Team) == "Pirates"
 
--- Chạy pcall để tránh lỗi nếu không tìm thấy sự kiện
-repeat task.wait() until tostring(game.Players.LocalPlayer.Team) == "Pirates"
 repeat task.wait() until game.Players.LocalPlayer.Character
-repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("Head")
+repeat task.wait() until game.Players.LocalPlayer.Character.Head
 
--- Kiểm tra xem game có đã tải chưa và đợi nếu cần thiết
 if not game:IsLoaded() then game.Loaded:Wait() end
-
--- Giờ thì bạn có thể tiếp tục với phần mã chính của bạn
 local plr = game.Players.LocalPlayer
-
--- Chạy sự kiện click vào button cho team "Pirates"
-pcall(function()
-    for _, v in pairs(getconnections(game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
-        v.Function()
-    end
-end)
-
--- Đảm bảo tất cả các thành phần đều đã tải đầy đủ trước khi sử dụng chúng
 
 game.StarterGui:SetCore("SendNotification", {
     Title = "Happy Cat Hub",
@@ -37,8 +22,8 @@ game.StarterGui:SetCore("SendNotification", {
     Duration = 2,
     })
 
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
 local Window = Fluent:CreateWindow({
     Title = "Happy Cat Hub",
     SubTitle = "by taidz",
@@ -50,7 +35,6 @@ local Window = Fluent:CreateWindow({
 })
     
 local Tabs = {
-    Setting = Window:AddTab({ Title = "Settings", Icon = "Settings" }),
     Main = Window:AddTab({ Title = "Main Farm", Icon = "" }),
     Stack = Window:AddTab({ Title = "Stack Auto Farm", Icon = "" }),
     Status = Window:AddTab({ Title = "Status", Icon = "" }),
@@ -62,6 +46,7 @@ local Tabs = {
     Shop = Window:AddTab({ Title = "Shop", Icon = "" }),
     RaceV4 = Window:AddTab({ Title = "RaceV4-Mirage", Icon = "" }),
     Event = Window:AddTab({ Title = "Sea Events", Icon = "" }),
+    Setting = Window:AddTab({ Title = "Settings", Icon = "" }),
     Game = Window:AddTab({ Title = "Game-Server", Icon = "" }),
 }
 
@@ -185,7 +170,68 @@ end)
 --Place Id Check
 local id = game.PlaceId
 if id == 2753915549 then First_Sea = true; elseif id == 4442272183 then Second_Sea = true; elseif id == 7449423635 then Third_Sea = true; else game.Players.LocalPlayer:Kick("Check script here : https://discord.gg/kuXFw2HkdN") end;
-    
+-- anti
+function AntiBan()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+     end
+    end
+    AntiBan()
+    spawn(function()
+        while wait() do
+        for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name == "red_game43" or v.Name == "rip_indra" or v.Name == "Axiore" or v.Name == "Polkster" or v.Name == "wenlocktoad" or v.Name == "Daigrock" or v.Name == "toilamvidamme" or v.Name == "oofficialnoobie" or v.Name == "Uzoth" or v.Name == "Azarth" or v.Name == "arlthmetic" or v.Name == "Death_King" or v.Name == "Lunoven" or v.Name == "TheGreateAced" or v.Name == "rip_fud" or v.Name == "drip_mama" or v.Name == "layandikit12" or v.Name == "Hingoi" then
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/m1M-Plqer819/hop/main/server/every"))()
+                end
+            end
+        end
+    end)
+
+    repeat
+        pcall(
+          function()
+          task.wait()
+          if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main"):FindFirstChild("ChooseTeam") then
+          if _G.Team == "Pirate" then
+          for r, v in pairs(
+            getconnections(
+              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated
+            )
+          ) do
+          v.Function()
+          end
+          elseif _G.Team == "Marine" then
+          for r, v in pairs(
+            getconnections(
+              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Activated
+            )
+          ) do
+          v.Function()
+          end
+          else
+            for r, v in pairs(
+            getconnections(
+              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated
+            )
+          ) do
+          v.Function()
+          end
+          end
+          end
+          end)
+        until game.Players.LocalPlayer.Team ~= nil
+
 -------------------------------------------------------------------------------------------------------------------------------------------- 
 
 game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -1188,41 +1234,38 @@ if not game:IsLoaded() then
 end--------------------------------------------------------------------------------
     --Remove Effect
     -----------------------------------------------------------
-    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-        game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
-    end
-    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
-    end
 
-    spawn(function()
-		local v930_args = require(game.ReplicatedStorage.Util.CameraShaker)
-		v930_args:Stop()
-	end)
 
-    DamageAura = true
-NoAttackAnimation = true
+local NoAttackAnimation = true
 local DmgAttack = game:GetService("ReplicatedStorage").Assets.GUI:WaitForChild("DamageCounter")
 local PC = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle)
 local RL = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
-local oldRL = RL.wrapAttackAnimationAsync
+local RigEven = game:GetService("ReplicatedStorage").RigControllerEvent
+local AttackAnim = Instance.new("Animation")
+local AttackCoolDown = 0
+local cooldowntickFire = 0
+local MaxFire = 1000
+local FireCooldown = 0.06
+local FireL = 0
+local Fast_Attack = true
+local bladehit = {}
+
 RL.wrapAttackAnimationAsync = function(a, b, c, d, func)
     if not NoAttackAnimation then
-        return oldRL(a, b, c, 60, func)
+        return RL.wrapAttackAnimationAsync(a, b, c, 60, func)
     end
 
     local Hits = {}
     local Client = game.Players.LocalPlayer
     local Characters = game:GetService("Workspace").Characters:GetChildren()
-    for i, v in pairs(Characters) do
+    for _, v in pairs(Characters) do
         local Human = v:FindFirstChildOfClass("Humanoid")
-        if v.Name ~= game.Players.LocalPlayer.Name and Human and Human.RootPart and Human.Health > 0 and
-            Client:DistanceFromCharacter(Human.RootPart.Position) < 65 then
+        if v.Name ~= Client.Name and Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < 65 then
             table.insert(Hits, Human.RootPart)
         end
     end
     local Enemies = game:GetService("Workspace").Enemies:GetChildren()
-    for i, v in pairs(Enemies) do
+    for _, v in pairs(Enemies) do
         local Human = v:FindFirstChildOfClass("Humanoid")
         if Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < 65 then
             table.insert(Hits, Human.RootPart)
@@ -1232,28 +1275,26 @@ RL.wrapAttackAnimationAsync = function(a, b, c, d, func)
     pcall(func, Hits)
 end
 
-getAllBladeHits = function(Sizes)
+local function getAllBladeHits(Sizes)
     local Hits = {}
     local Client = game.Players.LocalPlayer
     local Enemies = game:GetService("Workspace").Enemies:GetChildren()
-    for i, v in pairs(Enemies) do
+    for _, v in pairs(Enemies) do
         local Human = v:FindFirstChildOfClass("Humanoid")
-        if Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) <
-            Sizes + 5 then
+        if Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes + 5 then
             table.insert(Hits, Human.RootPart)
         end
     end
     return Hits
 end
 
-getAllBladeHitsPlayers = function(Sizes)
+local function getAllBladeHitsPlayers(Sizes)
     local Hits = {}
     local Client = game.Players.LocalPlayer
     local Characters = game:GetService("Workspace").Characters:GetChildren()
-    for i, v in pairs(Characters) do
+    for _, v in pairs(Characters) do
         local Human = v:FindFirstChildOfClass("Humanoid")
-        if v.Name ~= game.Players.LocalPlayer.Name and Human and Human.RootPart and Human.Health > 0 and
-            Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes + 5 then
+        if v.Name ~= Client.Name and Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes + 5 then
             table.insert(Hits, Human.RootPart)
         end
     end
@@ -1262,28 +1303,20 @@ end
 
 local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
 local CombatFrameworkR = getupvalues(CombatFramework)[2]
-local RigEven = game:GetService("ReplicatedStorage").RigControllerEvent
-local AttackAnim = Instance.new("Animation")
-local AttackCoolDown = 0
-local cooldowntickFire = 0
-local MaxFire = 1000
-local FireCooldown = 1.0
-local FireL = 0
-local bladehit = {}
 
-CancelCoolDown = function()
+local function CancelCoolDown()
     local ac = CombatFrameworkR.activeController
     if ac and ac.equipped then
-        AttackCoolDown = tick() + (FireCooldown or 0.288) + ((FireL / MaxFire) * 0.3)
-        RigEven.FireServer(RigEven, "weaponChange", ac.currentWeaponModel.Name)
+        AttackCoolDown = tick() + (FireCooldown or 0.01) + ((FireL / MaxFire) * 0.3)
+        RigEven:FireServer("weaponChange", ac.currentWeaponModel.Name)
         FireL = FireL + 1
-        task.delay((FireCooldown or 0.288) + ((FireL + 0.4 / MaxFire) * 0.3), function()
+        fask.delay((FireCooldown or 0.01) + ((FireL + 0.3 / MaxFire) * 0.3), function()
             FireL = FireL - 1
         end)
     end
 end
 
-AttackFunction = function(typef)
+local function AttackFunction(typef)
     local ac = CombatFrameworkR.activeController
     if ac and ac.equipped then
         local bladehit = {}
@@ -1292,84 +1325,62 @@ AttackFunction = function(typef)
         elseif typef == 2 then
             bladehit = getAllBladeHitsPlayers(65)
         else
-            for i2, v2 in pairs(getAllBladeHits(55)) do
+            for _, v2 in pairs(getAllBladeHits(55)) do
                 table.insert(bladehit, v2)
             end
-            for i3, v3 in pairs(getAllBladeHitsPlayers(55)) do
+            for _, v3 in pairs(getAllBladeHitsPlayers(55)) do
                 table.insert(bladehit, v3)
             end
         end
         if #bladehit > 0 then
-            pcall(task.spawn, ac.attack, ac)
+            pcall(fask.spawn, ac.attack, ac)
             if tick() > AttackCoolDown then
                 CancelCoolDown()
             end
-            if tick() - cooldowntickFire > 0.5 then
+            if tick() - cooldowntickFire > 0.3 then
                 ac.timeToNextAttack = 0
                 ac.hitboxMagnitude = 60
-                pcall(task.spawn, ac.attack, ac)
+                pcall(fask.spawn, ac.attack, ac)
                 cooldowntickFire = tick()
             end
-            local AMI3 = ac.anims.basic[7]
-            local AMI2 = ac.anims.basic[9]
-            local REALID = AMI3 or AMI2
+            local REALID = ac.anims.basic[3] or ac.anims.basic[2]
             AttackAnim.AnimationId = REALID
             local StartP = ac.humanoid:LoadAnimation(AttackAnim)
             StartP:Play(0.01, 0.01, 0.01)
-            RigEven.FireServer(RigEven, "hit", bladehit, AMI3 and 4 or 5, "")
-            task.delay(0.5, function()
+            RigEven:FireServer("hit", bladehit, REALID and 3 or 2, "")
+            fask.delay(0.01, function()
                 StartP:Stop()
             end)
         end
     end
 end
 
-function CheckStun()
-    if game:GetService('Players').LocalPlayer.Character:FindFirstChild("Stun") then
-        return game:GetService('Players').LocalPlayer.Character.Stun.Value ~= 0
-    end
-    return false
+local function CheckStun()
+    local character = game:GetService('Players').LocalPlayer.Character
+    return character:FindFirstChild("Stun") and character.Stun.Value ~= 0
 end
-Fast_Attack = true
-NeedAttacking = true
+
 spawn(function()
     while game:GetService("RunService").Stepped:Wait() do
         local ac = CombatFrameworkR.activeController
         if ac and ac.equipped and not CheckStun() then
-            if NeedAttacking and Fast_Attack then
-                task.spawn(function()
-                    pcall(task.spawn, AttackFunction, 8)
-                end)
-            elseif DamageAura then
-                task.spawn(function()
-                    pcall(task.spawn, AttackFunction, 7)
-                end)
-            elseif UsefastattackPlayers and Fast_Attack then
-                task.spawn(function()
-                    pcall(task.spawn, AttackFunction, 4)
-                end)
-            elseif NeedAttacking and Fast_Attack == false then
-                if ac.hitboxMagnitude ~= 55 then
-                    ac.hitboxMagnitude = 55
-                end
-                pcall(task.spawn, ac.attack, ac)
+            if Fast_Attack then
+                pcall(AttackFunction, 1)
             end
         end
     end
 end)
 
-local kkii = require(game.ReplicatedStorage.Util.CameraShaker)
-kkii:Stop()
-
-local SelectFastAttackMode = "Super Fast"
-local SelectedFastAttackModes = {"Normal Attack", "Fast Attack", "Super Fast"}
+-- Cấu hình chế độ tấn công nhanh
+local SelectFastAttackMode = "Taidz Fast"
+local SelectedFastAttackModes = {"Normal Attack", "Fast Attack", "Taidz Fast"}
 
 local function ChangeModeFastAttack(SelectFastAttackMode)
     if SelectFastAttackMode == "Normal Attack" then
         FireCooldown = 0.1
     elseif SelectFastAttackMode == "Fast Attack" then
         FireCooldown = 0.07
-    elseif SelectFastAttackMode == "Super Fast" then
+    elseif SelectFastAttackMode == "Taidz Fast" then
         FireCooldown = 0.02
     end
 end
@@ -1397,7 +1408,7 @@ end)
 
 local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
 Mouse.Button1Down:Connect(function()
-    if Fast_Attack then
+    if ClickNoCooldown then
         local ac = CombatFrameworkR.activeController
         if ac and ac.equipped then
             ac.hitboxMagnitude = 55
@@ -4784,31 +4795,3 @@ spawn(
         end
     end
 )
--- anti
-function AntiBan()
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
-                v:Destroy()
-            end
-        end
-     end
-     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
-                v:Destroy()
-            end
-        end
-     end
-    end
-    AntiBan()
-    spawn(function()
-        while wait() do
-        for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Name == "red_game43" or v.Name == "rip_indra" or v.Name == "Axiore" or v.Name == "Polkster" or v.Name == "wenlocktoad" or v.Name == "Daigrock" or v.Name == "toilamvidamme" or v.Name == "oofficialnoobie" or v.Name == "Uzoth" or v.Name == "Azarth" or v.Name == "arlthmetic" or v.Name == "Death_King" or v.Name == "Lunoven" or v.Name == "TheGreateAced" or v.Name == "rip_fud" or v.Name == "drip_mama" or v.Name == "layandikit12" or v.Name == "Hingoi" then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/m1M-Plqer819/hop/main/server/every"))()
-                end
-            end
-        end
-    end)
-
