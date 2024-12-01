@@ -1,20 +1,35 @@
+-- Đợi game và các dịch vụ chính được tải
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players
 repeat task.wait() until game.Players.LocalPlayer
 
-repeat wait()
-    pcall(function() 
-        for i, v in pairs(getconnections(game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
-            v.Function()
-        end 
-    end) 
-until tostring(game.Players.LocalPlayer.Team) == "Pirates"
+-- Đợi PlayerGui và các thành phần bên trong được tải
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main")
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam")
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam:FindFirstChild("Container")
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container:FindFirstChild("Pirates")
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates:FindFirstChild("Frame")
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame:FindFirstChild("TextButton")
 
+-- Chạy pcall để tránh lỗi nếu không tìm thấy sự kiện
+repeat task.wait() until tostring(game.Players.LocalPlayer.Team) == "Pirates"
 repeat task.wait() until game.Players.LocalPlayer.Character
-repeat task.wait() until game.Players.LocalPlayer.Character.Head
+repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("Head")
 
+-- Kiểm tra xem game có đã tải chưa và đợi nếu cần thiết
 if not game:IsLoaded() then game.Loaded:Wait() end
+
+-- Giờ thì bạn có thể tiếp tục với phần mã chính của bạn
 local plr = game.Players.LocalPlayer
+
+-- Chạy sự kiện click vào button cho team "Pirates"
+pcall(function()
+    for _, v in pairs(getconnections(game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
+        v.Function()
+    end
+end)
+
+-- Đảm bảo tất cả các thành phần đều đã tải đầy đủ trước khi sử dụng chúng
 
 game.StarterGui:SetCore("SendNotification", {
     Title = "Happy Cat Hub",
@@ -22,11 +37,11 @@ game.StarterGui:SetCore("SendNotification", {
     Duration = 2,
     })
 
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 local Window = Fluent:CreateWindow({
     Title = "Happy Cat Hub",
-    SubTitle = "bytaidz",
+    SubTitle = "by taidz",
     TabWidth = 100,
     Size = UDim2.fromOffset(530, 350),
     Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
@@ -35,6 +50,7 @@ local Window = Fluent:CreateWindow({
 })
     
 local Tabs = {
+    Setting = Window:AddTab({ Title = "Settings", Icon = "Settings" }),
     Main = Window:AddTab({ Title = "Main Farm", Icon = "" }),
     Stack = Window:AddTab({ Title = "Stack Auto Farm", Icon = "" }),
     Status = Window:AddTab({ Title = "Status", Icon = "" }),
@@ -46,7 +62,6 @@ local Tabs = {
     Shop = Window:AddTab({ Title = "Shop", Icon = "" }),
     RaceV4 = Window:AddTab({ Title = "RaceV4-Mirage", Icon = "" }),
     Event = Window:AddTab({ Title = "Sea Events", Icon = "" }),
-    Setting = Window:AddTab({ Title = "Settings", Icon = "" }),
     Game = Window:AddTab({ Title = "Game-Server", Icon = "" }),
 }
 
@@ -170,68 +185,7 @@ end)
 --Place Id Check
 local id = game.PlaceId
 if id == 2753915549 then First_Sea = true; elseif id == 4442272183 then Second_Sea = true; elseif id == 7449423635 then Third_Sea = true; else game.Players.LocalPlayer:Kick("Check script here : https://discord.gg/kuXFw2HkdN") end;
--- anti
-function AntiBan()
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
-                v:Destroy()
-            end
-        end
-     end
-     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
-                v:Destroy()
-            end
-        end
-     end
-    end
-    AntiBan()
-    spawn(function()
-        while wait() do
-        for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Name == "red_game43" or v.Name == "rip_indra" or v.Name == "Axiore" or v.Name == "Polkster" or v.Name == "wenlocktoad" or v.Name == "Daigrock" or v.Name == "toilamvidamme" or v.Name == "oofficialnoobie" or v.Name == "Uzoth" or v.Name == "Azarth" or v.Name == "arlthmetic" or v.Name == "Death_King" or v.Name == "Lunoven" or v.Name == "TheGreateAced" or v.Name == "rip_fud" or v.Name == "drip_mama" or v.Name == "layandikit12" or v.Name == "Hingoi" then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/m1M-Plqer819/hop/main/server/every"))()
-                end
-            end
-        end
-    end)
-
-    repeat
-        pcall(
-          function()
-          task.wait()
-          if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main"):FindFirstChild("ChooseTeam") then
-          if _G.Team == "Pirate" then
-          for r, v in pairs(
-            getconnections(
-              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated
-            )
-          ) do
-          v.Function()
-          end
-          elseif _G.Team == "Marine" then
-          for r, v in pairs(
-            getconnections(
-              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Activated
-            )
-          ) do
-          v.Function()
-          end
-          else
-            for r, v in pairs(
-            getconnections(
-              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated
-            )
-          ) do
-          v.Function()
-          end
-          end
-          end
-          end)
-        until game.Players.LocalPlayer.Team ~= nil
-
+    
 -------------------------------------------------------------------------------------------------------------------------------------------- 
 
 game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -1421,7 +1375,7 @@ local function ChangeModeFastAttack(SelectFastAttackMode)
 end
 
 -- Dropdown để chọn chế độ tấn công nhanh
-local SelectedFastAttackModesDropdown = Tabs.Main:AddDropdown("SelectedFastAttackModes", {
+local SelectedFastAttackModesDropdown = Tabs.Setting:AddDropdown("SelectedFastAttackModes", {
     Title = "Select Fast Attack",
     Values = SelectedFastAttackModes,
     Multi = false,
@@ -1434,7 +1388,7 @@ SelectedFastAttackModesDropdown:OnChanged(function(value)
 end)
 
 -- Toggle để bật tắt tấn công nhanh
-local FASTAT = Tabs.Main:AddToggle("Fast_Attack", {Title = "Fast Attack", Default = true})
+local FASTAT = Tabs.Setting:AddToggle("Fast_Attack", {Title = "Fast Attack", Default = true})
 FASTAT:OnChanged(function(value)
     Fast_Attack = value
     DamageAura = value
@@ -4830,3 +4784,31 @@ spawn(
         end
     end
 )
+-- anti
+function AntiBan()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                v:Destroy()
+            end
+        end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+        if v:IsA("LocalScript") then
+            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                v:Destroy()
+            end
+        end
+     end
+    end
+    AntiBan()
+    spawn(function()
+        while wait() do
+        for i,v in pairs(game.Players:GetPlayers()) do
+            if v.Name == "red_game43" or v.Name == "rip_indra" or v.Name == "Axiore" or v.Name == "Polkster" or v.Name == "wenlocktoad" or v.Name == "Daigrock" or v.Name == "toilamvidamme" or v.Name == "oofficialnoobie" or v.Name == "Uzoth" or v.Name == "Azarth" or v.Name == "arlthmetic" or v.Name == "Death_King" or v.Name == "Lunoven" or v.Name == "TheGreateAced" or v.Name == "rip_fud" or v.Name == "drip_mama" or v.Name == "layandikit12" or v.Name == "Hingoi" then
+                loadstring(game:HttpGet("https://raw.githubusercontent.com/m1M-Plqer819/hop/main/server/every"))()
+                end
+            end
+        end
+    end)
+
