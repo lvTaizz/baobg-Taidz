@@ -1,6 +1,8 @@
+repeat task.wait() until game:IsLoaded()
+repeat task.wait() until game.Players
+repeat task.wait() until game.Players.LocalPlayer
 
-
-repeat wait()
+repeat task.wait()
     pcall(function() 
         for i, v in pairs(getconnections(game.Players.LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do
             v.Function()
@@ -9,19 +11,20 @@ repeat wait()
 until tostring(game.Players.LocalPlayer.Team) == "Pirates"
 
 repeat task.wait() until game.Players.LocalPlayer.Character
-repeat task.wait() until game.Players.LocalPlayer.Character.Head
+repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("Head")
 
 if not game:IsLoaded() then game.Loaded:Wait() end
 local plr = game.Players.LocalPlayer
 
 game.StarterGui:SetCore("SendNotification", {
-    Icon ="rbxassetid://104450799419041"
     Title = "Happy Cat Hub",
-    Text = "Loading",
+    Text = "Wait for load game",
     Duration = 2,
-    })
+})
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
     Title = "Happy Cat Hub",
@@ -34,6 +37,7 @@ local Window = Fluent:CreateWindow({
 })
     
 local Tabs = {
+    Setting = Window:AddTab({ Title = "Settings", Icon = "" }),
     Main = Window:AddTab({ Title = "Main Farm", Icon = "" }),
     Stack = Window:AddTab({ Title = "Stack Auto Farm", Icon = "" }),
     Status = Window:AddTab({ Title = "Status", Icon = "" }),
@@ -45,7 +49,6 @@ local Tabs = {
     Shop = Window:AddTab({ Title = "Shop", Icon = "" }),
     RaceV4 = Window:AddTab({ Title = "RaceV4-Mirage", Icon = "" }),
     Event = Window:AddTab({ Title = "Sea Events", Icon = "" }),
-    Setting = Window:AddTab({ Title = "Settings", Icon = "" }),
     Game = Window:AddTab({ Title = "Game-Server", Icon = "" }),
 }
 
@@ -170,16 +173,6 @@ end)
 local id = game.PlaceId
 if id == 2753915549 then First_Sea = true; elseif id == 4442272183 then Second_Sea = true; elseif id == 7449423635 then Third_Sea = true; else game.Players.LocalPlayer:Kick("Check script here : https://discord.gg/kuXFw2HkdN") end;
 -- anti
-spawn(function()
-    while wait() do
-    for i,v in pairs(game.Players:GetPlayers()) do
-        if v.Name == "red_game43" or v.Name == "rip_indra" or v.Name == "Axiore" or v.Name == "Polkster" or v.Name == "wenlocktoad" or v.Name == "Daigrock" or v.Name == "toilamvidamme" or v.Name == "oofficialnoobie" or v.Name == "Uzoth" or v.Name == "Azarth" or v.Name == "arlthmetic" or v.Name == "Death_King" or v.Name == "Lunoven" or v.Name == "TheGreateAced" or v.Name == "rip_fud" or v.Name == "drip_mama" or v.Name == "layandikit12" or v.Name == "Hingoi" then
-            Hop()
-            end
-        end
-    end
-end)
-
 -------------------------------------------------------------------------------------------------------------------------------------------- 
 
 game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -1140,6 +1133,7 @@ end
     end)
     L_93_.CornerRadius = UDim.new(0, 15)
     L_93_.Parent = L_92_
+
 --------------------------------------------------------------------------------
     --Remove Effect
     -----------------------------------------------------------
@@ -1155,7 +1149,7 @@ end
 		v930_args:Stop()
 	end)
 
-local NoAttackAnimation = true
+    local NoAttackAnimation = true
 local DmgAttack = game:GetService("ReplicatedStorage").Assets.GUI:WaitForChild("DamageCounter")
 local PC = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle)
 local RL = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
@@ -1291,15 +1285,15 @@ spawn(function()
 end)
 
 -- Cấu hình chế độ tấn công nhanh
-local SelectFastAttackMode = "Taidz Fast"
-local SelectedFastAttackModes = {"Normal Attack", "Fast Attack", "Taidz Fast"}
+local SelectFastAttackMode = "Supper Fast"
+local SelectedFastAttackModes = {"Normal Attack", "Fast Attack", "Supper Fast"}
 
 local function ChangeModeFastAttack(SelectFastAttackMode)
     if SelectFastAttackMode == "Normal Attack" then
         FireCooldown = 0.1
     elseif SelectFastAttackMode == "Fast Attack" then
         FireCooldown = 0.07
-    elseif SelectFastAttackMode == "Taidz Fast" then
+    elseif SelectFastAttackMode == "Supper Fast" then
         FireCooldown = 0.02
     end
 end
