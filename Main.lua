@@ -1,6 +1,4 @@
-repeat task.wait() until game:IsLoaded()
-repeat task.wait() until game.Players
-repeat task.wait() until game.Players.LocalPlayer
+
 
 repeat wait()
     pcall(function() 
@@ -17,7 +15,7 @@ if not game:IsLoaded() then game.Loaded:Wait() end
 local plr = game.Players.LocalPlayer
 
 game.StarterGui:SetCore("SendNotification", {
-    Icon ="http://www.roblox.com/asset/?id=104450799419041"
+    Icon ="rbxassetid://104450799419041"
     Title = "Happy Cat Hub",
     Text = "Loading",
     Duration = 2,
