@@ -17,6 +17,7 @@ if not game:IsLoaded() then game.Loaded:Wait() end
 local plr = game.Players.LocalPlayer
 
 game.StarterGui:SetCore("SendNotification", {
+    Icon ="http://www.roblox.com/asset/?id=104450799419041"
     Title = "Happy Cat Hub",
     Text = "Loading",
     Duration = 2,
@@ -171,66 +172,15 @@ end)
 local id = game.PlaceId
 if id == 2753915549 then First_Sea = true; elseif id == 4442272183 then Second_Sea = true; elseif id == 7449423635 then Third_Sea = true; else game.Players.LocalPlayer:Kick("Check script here : https://discord.gg/kuXFw2HkdN") end;
 -- anti
-function AntiBan()
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
-                v:Destroy()
+spawn(function()
+    while wait() do
+    for i,v in pairs(game.Players:GetPlayers()) do
+        if v.Name == "red_game43" or v.Name == "rip_indra" or v.Name == "Axiore" or v.Name == "Polkster" or v.Name == "wenlocktoad" or v.Name == "Daigrock" or v.Name == "toilamvidamme" or v.Name == "oofficialnoobie" or v.Name == "Uzoth" or v.Name == "Azarth" or v.Name == "arlthmetic" or v.Name == "Death_King" or v.Name == "Lunoven" or v.Name == "TheGreateAced" or v.Name == "rip_fud" or v.Name == "drip_mama" or v.Name == "layandikit12" or v.Name == "Hingoi" then
+            Hop()
             end
         end
-     end
-     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
-        if v:IsA("LocalScript") then
-            if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
-                v:Destroy()
-            end
-        end
-     end
     end
-    AntiBan()
-    spawn(function()
-        while wait() do
-        for i,v in pairs(game.Players:GetPlayers()) do
-            if v.Name == "red_game43" or v.Name == "rip_indra" or v.Name == "Axiore" or v.Name == "Polkster" or v.Name == "wenlocktoad" or v.Name == "Daigrock" or v.Name == "toilamvidamme" or v.Name == "oofficialnoobie" or v.Name == "Uzoth" or v.Name == "Azarth" or v.Name == "arlthmetic" or v.Name == "Death_King" or v.Name == "Lunoven" or v.Name == "TheGreateAced" or v.Name == "rip_fud" or v.Name == "drip_mama" or v.Name == "layandikit12" or v.Name == "Hingoi" then
-                loadstring(game:HttpGet("https://raw.githubusercontent.com/m1M-Plqer819/hop/main/server/every"))()
-                end
-            end
-        end
-    end)
-
-    repeat
-        pcall(
-          function()
-          task.wait()
-          if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main"):FindFirstChild("ChooseTeam") then
-          if _G.Team == "Pirate" then
-          for r, v in pairs(
-            getconnections(
-              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated
-            )
-          ) do
-          v.Function()
-          end
-          elseif _G.Team == "Marine" then
-          for r, v in pairs(
-            getconnections(
-              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Activated
-            )
-          ) do
-          v.Function()
-          end
-          else
-            for r, v in pairs(
-            getconnections(
-              game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated
-            )
-          ) do
-          v.Function()
-          end
-          end
-          end
-          end)
-        until game.Players.LocalPlayer.Team ~= nil
+end)
 
 -------------------------------------------------------------------------------------------------------------------------------------------- 
 
