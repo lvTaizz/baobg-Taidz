@@ -3304,7 +3304,7 @@ task.spawn(function()
     end
 end)
 
-Toggle = Tabs.Stack:AddToggle("MyToggle", {Title = "Auto CDK┊New Update", Default = false })
+Toggle = Tabs.Stack:AddToggle("MyToggle", {Title = "Auto CDK", Default = false })
 
     Toggle:OnChanged(function(Value)
         Auto_Cursed_Dual_Katana = Value
@@ -3881,49 +3881,6 @@ inmyselfss = Fast_2(function(name)
 	return OutValue or game:GetService("Players").LocalPlayer.Character:FindFirstChild(name)
 end)
 
-local ToggleDashNoCD = Tabs.NguoiChoi:AddToggle("ToggleDashNoCD", {Title = "Dash No Cooldown", Default = false })
-ToggleDashNoCD:OnChanged(function(Value)
-    DodgeNoCoolDown = Value
-end)
-Options.ToggleDashNoCD:SetValue(false)
-		if DodgeNoCoolDown then
-			for i,v in next, getgc() do
-				if game.Players.LocalPlayer.Character.Dodge then
-					if typeof(v) == "function" and getfenv(v).script == game.Players.LocalPlayer.Character.Dodge then
-						for i2,v2 in next, getupvalues(v) do
-							if tostring(v2) == "0.4" then
-								repeat wait(.1)
-									setupvalue(v,i2,0)
-								until not DodgeNoCoolDown
-							end
-						end
-					end
-				end
-			end
-		end
-
-    local Slider = Tabs.NguoiChoi:AddSlider("Slider", {
-        Title = "Player Speed",
-        Description = "",
-        Default = 2,
-        Min = 1,
-        Max = 100,
-        Rounding = 1,
-        Callback = function(Value)
-            game.Players.LocalPlayer.Character:SetAttribute("SpeedMultiplier",Value)
-        end
-    })
-    local Slider = Tabs.NguoiChoi:AddSlider("Slider", {
-        Title = "Jump Power",
-        Description = "",
-        Default = 50,
-        Min = 50,
-        Max = 500,
-        Rounding = 1,
-        Callback = function(Value)
-            game.Players.LocalPlayer.Character:SetAttribute("JumpPower",Value)
-        end
-    })
 
     Playerslist = {}
     
