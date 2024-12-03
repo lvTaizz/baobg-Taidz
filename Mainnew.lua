@@ -2333,7 +2333,7 @@ end)
     
     game.StarterGui:SetCore("SendNotification", {
 Title = "Loading",
-Text = "Wait 3s-5s",
+Text = "plz wait",
 Duration = 3,
 })
 
@@ -2872,59 +2872,7 @@ end
 end
 end)
 
-  if First_Sea then
-      tableBoss = {"The Gorilla King","Bobby","Yeti","Mob Leader","Vice Admiral","Warden","Chief Warden","Swan","Magma Admiral","Fishman Lord","Wysper","Thunder God","Cyborg","Saber Expert"}
-  elseif Second_Sea then
-      tableBoss = {"Diamond","Jeremy","Fajita","Don Swan","Smoke Admiral","Cursed Captain","Darkbeard","Order","Awakened Ice Admiral","Tide Keeper"}
-  elseif Third_Sea then
-      tableBoss = {"Stone","Island Empress","Kilo Admiral","Captain Elephant","Beautiful Pirate","rip_indra True Form","Longma","Soul Reaper","Cake Queen"}
-  end
   
-  local Boss_Snipe = Tabs.Stack:AddDropdown("Boss_Snipe", {
-      Title = "Select Boss Snipe",
-      Description = "",
-      Values = tableBoss,
-      Multi = true,
-      Default = 1,
-  })
-  Boss_Snipe:SetValue("")
-  Boss_Snipe:OnChanged(function(Value)
-    _G.SelectBoss = Value
-end)
-  
-  local Auto_Boss = Tabs.Stack:AddToggle("Auto_Boss", {Title = "Start Boss Snipe", Description = "", Default = false })
-  Auto_Boss:OnChanged(function(Value)
-    _G.AutoBoss = Value
-  end)
-  Options.Auto_Boss:SetValue(false)
-  
-spawn(function()
-while wait() do
-if _G.AutoBoss then
-if game:GetService("Workspace").Enemies:FindFirstChild(_G.SelectBoss) then
-  for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-    if v.Name == _G.SelectBoss then
-      if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-        repeat task.wait()
-            T.Text = "Auto Farm: Killing Boss | " .. (_G.SelectBoss)
-            NeedAttacking = true
-            AutoHaki()
-            EquipTool(SelectWeapon)
-            Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
-            KillMonster(v.Name, true, _G.AutoBoss == false)                   
-        until not  _G.AutoBoss or not v.Parent or v.Humanoid.Health <= 0
-      end
-    end
-  end
-else
-  if game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss) then
-    Tween(game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame * CFrame.new(5,10,2))
-  end
-end
-end
-end
-end)  
-
 local AutoBartilo = Tabs.Stack:AddToggle("AutoBartilo", {Title = "Auto Bartilo", Description = "Sea 2 Function Only", Default = false })
 AutoBartilo:OnChanged(function(Value)
     _G.AutoBartilo = Value
